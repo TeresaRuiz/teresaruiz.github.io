@@ -863,7 +863,7 @@ function recalcModule(mid) {
     if (ng !== null) { hasAny = true; finalNote += ng; }
 
     const cls = ng !== null ? (g >= passGrade ? 'has-val' : 'zero') : 'empty';
-    const txt = ng !== null ? ng.toFixed(2) : '—';
+    const txt = ng !== null ? ng.toFixed(1) : '—';
 
     // update mobile
     const ngMob = document.getElementById(`ng-mob-${mid}-${a.id}`);
@@ -882,7 +882,7 @@ function recalcModule(mid) {
   const finalEl = document.getElementById(`final-${mid}`);
   if (finalEl) {
     if (!hasAny) { finalEl.textContent = '—'; finalEl.className = 'module-final-value neutral'; m._final = null; }
-    else { finalEl.textContent = finalNote.toFixed(2); finalEl.className = 'module-final-value ' + (finalNote >= passGrade ? 'pass' : 'fail'); m._final = finalNote; }
+    else { finalEl.textContent = finalNote.toFixed(1); finalEl.className = 'module-final-value ' + (finalNote >= passGrade ? 'pass' : 'fail'); m._final = finalNote; }
   }
 }
 
