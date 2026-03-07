@@ -822,7 +822,7 @@ function recalcModule(mid) {
       finalEl.textContent = '—'; finalEl.className = 'module-final-value neutral'; m._final = null;
     } else {
       // Nota final con 2 decimales
-      finalEl.textContent = finalNmodal-header(1);
+      finalEl.textContent = finalNote.toFixed(1);
       finalEl.className = 'module-final-value ' + (finalNote >= passGrade ? 'pass' : 'fail');
       m._final = finalNote;
     }
