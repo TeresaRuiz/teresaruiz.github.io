@@ -482,7 +482,7 @@ header h1 span { color: var(--accent); }
   <div id="modules-container"></div>
   <button class="btn-add-module" onclick="doAddModule()">+ Agregar materia</button>
 
-  <div class="summary-card">
+  <div class="summary-card" style="display:none">
     <div class="summary-title"><span class="dot"></span> Resumen General</div>
     <div class="summary-grid">
       <div class="stat-box">
@@ -822,7 +822,7 @@ function recalcModule(mid) {
       finalEl.textContent = '—'; finalEl.className = 'module-final-value neutral'; m._final = null;
     } else {
       // Nota final con 2 decimales
-      finalEl.textContent = finalNote.toFixed(2);
+      finalEl.textContent = finalNmodal-header(1);
       finalEl.className = 'module-final-value ' + (finalNote >= passGrade ? 'pass' : 'fail');
       m._final = finalNote;
     }
