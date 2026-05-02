@@ -237,7 +237,7 @@ header h1 span { color: var(--accent); }
 }
 .btn-add-module:active { background: rgba(200,247,81,0.07); }
 
-/* CUM Card */
+/* CUM Card — MANUAL */
 .cum-card {
   background: var(--surface); border: 1px solid var(--border);
   border-radius: var(--radius); padding: 1.1rem; margin-bottom: 1rem;
@@ -257,19 +257,69 @@ header h1 span { color: var(--accent); }
 .cum-big.neutral { color: var(--muted); }
 .cum-detail {
   font-family: 'DM Mono', monospace; font-size: 0.72rem;
-  color: var(--muted); text-align: center; margin-top: 0.4rem;
+  color: var(--muted); text-align: center; margin-top: 0.4rem; margin-bottom: 1rem;
 }
-.cum-rows { margin-top: 0.85rem; display: flex; flex-direction: column; gap: 0.3rem; }
-.cum-row {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 0.4rem 0.7rem; border-radius: 7px;
+.cum-manual-list { display: flex; flex-direction: column; gap: 0.45rem; margin-bottom: 0.75rem; }
+.cum-manual-row {
+  display: flex; align-items: center; gap: 0.5rem;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 0.5rem 0.65rem;
+}
+.cum-manual-name {
+  background: transparent; border: none; border-bottom: 1px solid var(--border);
+  color: var(--text); font-family: 'Syne', sans-serif; font-size: 0.88rem; font-weight: 700;
+  flex: 1; outline: none; padding: 0.2rem 0; min-height: 34px;
+  transition: border-color 0.2s;
+}
+.cum-manual-name:focus { border-color: var(--accent); }
+.cum-manual-num {
   background: var(--bg); border: 1px solid var(--border);
-  font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted);
-  gap: 0.5rem;
+  border-radius: 7px; color: var(--text);
+  font-family: 'DM Mono', monospace; font-size: 0.9rem;
+  width: 62px; text-align: center; outline: none;
+  padding: 0.3rem 0.3rem; min-height: 36px; transition: border-color 0.2s;
 }
-.cum-row-name { flex: 1; color: var(--text); font-size: 0.78rem; font-family: 'Syne', sans-serif; font-weight: 700; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.cum-row-eq   { white-space: nowrap; flex-shrink: 0; }
-.cum-row-val  { color: var(--orange); font-weight: 700; flex-shrink: 0; }
+.cum-manual-num:focus { border-color: var(--accent); }
+.cum-manual-uv {
+  background: var(--bg); border: 1px solid rgba(245,166,35,0.35);
+  border-radius: 7px; color: var(--orange);
+  font-family: 'DM Mono', monospace; font-size: 0.9rem; font-weight: 700;
+  width: 52px; text-align: center; outline: none;
+  padding: 0.3rem 0.2rem; min-height: 36px; transition: border-color 0.2s;
+}
+.cum-manual-uv:focus { border-color: var(--orange); }
+.cum-manual-lbl {
+  font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--muted);
+}
+.cum-manual-del {
+  background: none; border: none; color: var(--muted); cursor: pointer;
+  font-size: 1rem; padding: 0.25rem; border-radius: 6px;
+  min-width: 32px; min-height: 32px;
+  display: flex; align-items: center; justify-content: center;
+}
+.cum-manual-del:active { color: var(--fail); }
+.cum-manual-headers {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0 0.65rem; margin-bottom: 0.2rem;
+}
+.cum-manual-h {
+  font-family: 'DM Mono', monospace; font-size: 0.58rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+}
+.btn-add-cum {
+  background: transparent; border: 1px dashed var(--orange); color: var(--orange);
+  border-radius: 9px; cursor: pointer; font-family: 'Syne', sans-serif; font-weight: 700;
+  font-size: 0.8rem; padding: 0.55rem 1rem; min-height: var(--touch);
+  width: 100%; transition: background 0.2s; margin-top: 0.25rem;
+}
+.btn-add-cum:active { background: rgba(245,166,35,0.07); }
+.cum-result-bar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.55rem 0.75rem; border-radius: 9px; margin-top: 0.75rem;
+  background: rgba(245,166,35,0.07); border: 1px solid rgba(245,166,35,0.2);
+  font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--muted);
+}
+.cum-result-bar strong { color: var(--orange); font-size: 0.9rem; }
 
 /* Modal */
 .modal-overlay {
@@ -416,6 +466,7 @@ header h1 span { color: var(--accent); }
     padding: 0.35rem 0.75rem; color: var(--muted); background: rgba(0,0,0,0.2);
   }
   .pct-total-row .pct-val { text-align: center; }
+  .cum-manual-row { flex-wrap: nowrap; }
 }
 @media (max-width: 639px) {
   .activities-table-wrap { display: none; }
@@ -464,12 +515,26 @@ header h1 span { color: var(--accent); }
   <div id="modules-container"></div>
   <button class="btn-add-module" onclick="doAddModule()">+ Agregar materia</button>
 
-  <!-- CUM Card -->
+  <!-- CUM Card — MANUAL -->
   <div class="cum-card">
     <div class="cum-title"><span class="dot"></span> CUM — Promedio Ponderado por UV</div>
     <span class="cum-big neutral" id="cum-value">—</span>
-    <div class="cum-detail" id="cum-detail">Ingresa las UV en cada materia para calcular</div>
-    <div class="cum-rows" id="cum-rows"></div>
+    <div class="cum-detail" id="cum-detail">Agrega materias aprobadas para calcular tu CUM</div>
+
+    <div class="cum-manual-headers">
+      <span class="cum-manual-h" style="flex:1">Materia</span>
+      <span class="cum-manual-h" style="width:62px;text-align:center">Nota</span>
+      <span class="cum-manual-h" style="width:52px;text-align:center">UV</span>
+      <span style="width:32px"></span>
+    </div>
+
+    <div class="cum-manual-list" id="cum-manual-list"></div>
+    <button class="btn-add-cum" onclick="addCumRow()">+ Agregar materia al CUM</button>
+
+    <div class="cum-result-bar">
+      <span>Total UV ingresadas</span>
+      <strong id="cum-total-uv">0 UV</strong>
+    </div>
   </div>
 
 </div>
@@ -524,6 +589,9 @@ let undoStack = [];
 let redoStack = [];
 let _ignoreHistory = false;
 
+let cumRows = [];
+let cumCounter = 0;
+
 const passGradeEl = document.getElementById('pass-grade');
 const maxGradeEl  = document.getElementById('max-grade');
 passGradeEl.addEventListener('change', () => { pushHistory(); recalcAll(); markUnsaved(); });
@@ -536,7 +604,8 @@ function snapshot() {
       activities: m.activities.map(a => ({...a}))
     })),
     moduleCounter, actCounter,
-    passGrade: passGradeEl.value, maxGrade: maxGradeEl.value
+    passGrade: passGradeEl.value, maxGrade: maxGradeEl.value,
+    cumRows: cumRows.map(r => ({...r})), cumCounter
   });
 }
 function pushHistory() {
@@ -558,6 +627,10 @@ function restoreSnapshot(snap) {
     renderModule(m.mid, m.name, m.activities, m.open, m.uv || 0);
     modules.push({ mid: m.mid, name: m.name, open: m.open, uv: m.uv || 0, activities: m.activities, _final: null });
   });
+  // restore cum rows
+  cumRows = (s.cumRows || []).map(r => ({...r}));
+  cumCounter = s.cumCounter || 0;
+  renderCumList();
   recalcAll(); _ignoreHistory = false;
 }
 function undo() {
@@ -593,6 +666,71 @@ function showToast(msg) {
   toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
 }
 
+// ── CUM MANUAL ──────────────────────────────────────────────
+function addCumRow(name, grade, uv) {
+  const id = cumCounter++;
+  cumRows.push({ id, name: name || '', grade: grade !== undefined ? grade : '', uv: uv !== undefined ? uv : '' });
+  renderCumList();
+  recalcCUM();
+  markUnsaved();
+}
+
+function removeCumRow(id) {
+  pushHistory();
+  cumRows = cumRows.filter(r => r.id !== id);
+  renderCumList();
+  recalcCUM();
+  markUnsaved();
+}
+
+function updateCumRow(id, field, val) {
+  const r = cumRows.find(r => r.id === id);
+  if (r) { r[field] = val; recalcCUM(); markUnsaved(); }
+}
+
+function renderCumList() {
+  const list = document.getElementById('cum-manual-list');
+  list.innerHTML = '';
+  cumRows.forEach(r => {
+    const row = document.createElement('div');
+    row.className = 'cum-manual-row';
+    row.id = `cum-row-${r.id}`;
+    row.innerHTML = `
+      <input class="cum-manual-name" type="text" placeholder="Nombre materia"
+        value="${r.name}" oninput="updateCumRow(${r.id},'name',this.value)" onchange="pushHistory();markUnsaved()">
+      <input class="cum-manual-num" type="number" inputmode="decimal" placeholder="Nota" min="0" step="0.01"
+        value="${r.grade}" oninput="updateCumRow(${r.id},'grade',this.value)" onchange="pushHistory();markUnsaved()">
+      <input class="cum-manual-uv" type="number" inputmode="numeric" placeholder="UV" min="0" step="1"
+        value="${r.uv}" oninput="updateCumRow(${r.id},'uv',this.value)" onchange="pushHistory();markUnsaved()">
+      <button class="cum-manual-del" onclick="removeCumRow(${r.id})">✕</button>`;
+    list.appendChild(row);
+  });
+}
+
+function recalcCUM() {
+  const passGrade = parseFloat(passGradeEl.value) || 6;
+  const validas = cumRows.filter(r => r.grade !== '' && r.uv !== '' && !isNaN(parseFloat(r.grade)) && parseFloat(r.uv) > 0);
+  const cumEl   = document.getElementById('cum-value');
+  const detEl   = document.getElementById('cum-detail');
+  const totalUVEl = document.getElementById('cum-total-uv');
+
+  const totalUV = validas.reduce((s,r) => s + parseFloat(r.uv), 0);
+  if (totalUVEl) totalUVEl.textContent = totalUV + ' UV';
+
+  if (!validas.length) {
+    cumEl.textContent = '—'; cumEl.className = 'cum-big neutral';
+    if (detEl) detEl.textContent = 'Agrega materias aprobadas para calcular tu CUM';
+    return;
+  }
+
+  const sumaNxUV = validas.reduce((s,r) => s + parseFloat(r.grade) * parseFloat(r.uv), 0);
+  const cum = sumaNxUV / totalUV;
+  cumEl.textContent = cum.toFixed(2);
+  cumEl.className = 'cum-big ' + (cum >= passGrade ? 'pass' : 'fail');
+  if (detEl) detEl.textContent = `Basado en ${totalUV} UV · ${validas.length} materia(s)`;
+}
+
+// ── MODULES ──────────────────────────────────────────────────
 function doAddModule() {
   pushHistory();
   const mid = moduleCounter++;
@@ -608,7 +746,7 @@ function doAddModule() {
   ];
   modules.push({ mid, name:'', open:false, uv:0, activities:acts, _final:null });
   renderModule(mid, '', acts, false, 0);
-  recalcModule(mid); recalcCUM(); markUnsaved();
+  recalcModule(mid); markUnsaved();
 }
 
 function renderModule(mid, name, acts, open, uv) {
@@ -644,10 +782,6 @@ function buildModuleHTML(mid, name, acts, uv) {
         <label>Nombre:</label>
         <input class="module-name-input" type="text" placeholder="Ej: Cálculo Integral"
           value="${dn}" oninput="updateModuleName(${mid},this.value)" onchange="pushHistory();markUnsaved()">
-        <label>UV:</label>
-        <input class="uv-input-field" type="number" inputmode="numeric" placeholder="0" min="0" max="20" step="1"
-          value="${uvVal > 0 ? uvVal : ''}"
-          oninput="updateModuleUV(${mid},this.value)" onchange="pushHistory();markUnsaved()">
       </div>
       <div class="activities-list" id="acts-mobile-${mid}">${mobileRows}</div>
       <div class="activities-table-wrap">
@@ -727,15 +861,10 @@ function updateModuleName(mid, val) {
   if (disp) { disp.textContent = val || 'Nueva materia'; disp.className = 'module-name-display' + (val ? '' : ' placeholder'); }
 }
 
-function updateModuleUV(mid, val) {
-  const m = modules.find(m => m.mid === mid);
-  if (m) { m.uv = parseFloat(val) || 0; recalcCUM(); markUnsaved(); }
-}
-
 function updateActivity(mid, aid, field, val) {
   const m = modules.find(m => m.mid === mid); if (!m) return;
   const a = m.activities.find(a => a.id === aid);
-  if (a) { a[field] = val; recalcModule(mid); recalcCUM(); }
+  if (a) { a[field] = val; recalcModule(mid); }
 }
 
 function doAddActivity(mid) {
@@ -748,7 +877,7 @@ function doAddActivity(mid) {
   if (mobileList) { const tmp = document.createElement('div'); tmp.innerHTML = buildActivityCardHTML(mid, a); mobileList.appendChild(tmp.firstElementChild); }
   const tbody = document.getElementById(`tbody-${mid}`);
   if (tbody) { const tmp = document.createElement('table'); tmp.innerHTML = `<tbody>${buildRowHTML(mid, a)}</tbody>`; tbody.appendChild(tmp.querySelector('tr')); }
-  recalcModule(mid); recalcCUM(); markUnsaved();
+  recalcModule(mid); markUnsaved();
 }
 
 function doRemoveActivity(mid, aid) {
@@ -756,14 +885,14 @@ function doRemoveActivity(mid, aid) {
   const m = modules.find(m => m.mid === mid); if (!m) return;
   m.activities = m.activities.filter(a => a.id !== aid);
   ['act-card','row'].forEach(prefix => { const el = document.getElementById(`${prefix}-${mid}-${aid}`); if (el) el.remove(); });
-  recalcModule(mid); recalcCUM(); markUnsaved();
+  recalcModule(mid); markUnsaved();
 }
 
 function doRemoveModule(mid) {
   pushHistory();
   modules = modules.filter(m => m.mid !== mid);
   const card = document.getElementById(`module-${mid}`); if (card) card.remove();
-  recalcCUM(); markUnsaved();
+  markUnsaved();
 }
 
 function recalcModule(mid) {
@@ -810,63 +939,7 @@ function recalcAll() {
   recalcCUM();
 }
 
-function recalcCUM() {
-  const passGrade = parseFloat(passGradeEl.value) || 6;
-  const validas   = modules.filter(m => m._final != null && m.uv > 0);
-  const conNota   = modules.filter(m => m._final != null);
-  const cumEl  = document.getElementById('cum-value');
-  const detEl  = document.getElementById('cum-detail');
-  const rowsEl = document.getElementById('cum-rows');
-
-  // Tabla detalle
-  if (rowsEl) {
-    rowsEl.innerHTML = conNota.map(m => {
-      const uvStr = m.uv > 0 ? m.uv + ' UV' : '— UV';
-      const prod  = m.uv > 0 ? (m._final * m.uv).toFixed(2) : '—';
-      const nombre = m.name || 'Sin nombre';
-      return `<div class="cum-row">
-        <span class="cum-row-name">${nombre}</span>
-        <span class="cum-row-eq">${m._final.toFixed(1)} x ${uvStr} =</span>
-        <span class="cum-row-val">${prod}</span>
-      </div>`;
-    }).join('');
-  }
-
-  if (!validas.length) {
-    cumEl.textContent = '—'; cumEl.className = 'cum-big neutral';
-    if (detEl) detEl.textContent = conNota.length > 0
-      ? 'Ingresa las UV de cada materia para calcular'
-      : 'Agrega notas y UV para calcular';
-    return;
-  }
-
-  const sumaNxUV = validas.reduce((s, m) => s + m._final * m.uv, 0);
-  const sumaUV   = validas.reduce((s, m) => s + m.uv, 0);
-  const cum = sumaNxUV / sumaUV;
-
-  cumEl.textContent = cum.toFixed(2);
-  cumEl.className = 'cum-big ' + (cum >= passGrade ? 'pass' : 'fail');
-
-  if (detEl) {
-    const sinUV = modules.filter(m => m._final != null && !(m.uv > 0)).length;
-    detEl.textContent = sinUV > 0
-      ? `${sumaUV} UV usadas · ${sinUV} materia(s) sin UV ingresada`
-      : `Basado en ${sumaUV} UV · ${validas.length} materia(s)`;
-  }
-}
-
-function loadSaved() {
-  const snap = localStorage.getItem('notasApp_save');
-  if (snap) {
-    try {
-      _ignoreHistory = true; restoreSnapshot(snap); _ignoreHistory = false;
-      const el = document.getElementById('save-status');
-      el.textContent = '✓ Cargado'; el.className = 'save-status saved'; return true;
-    } catch(e) {}
-  }
-  return false;
-}
-
+// ── AVANCE ────────────────────────────────────────────────────
 const CARRERA = [
   { cycle: 'Primer Ciclo', subjects: [
     { name: 'Antropología Filosófica', uv: 3 },{ name: 'Cálculo Diferencial', uv: 4 },
@@ -1007,6 +1080,19 @@ function loadAvanceState() {
   buildDefaultAvance();
 }
 
+// ── INIT ─────────────────────────────────────────────────────
+function loadSaved() {
+  const snap = localStorage.getItem('notasApp_save');
+  if (snap) {
+    try {
+      _ignoreHistory = true; restoreSnapshot(snap); _ignoreHistory = false;
+      const el = document.getElementById('save-status');
+      el.textContent = '✓ Cargado'; el.className = 'save-status saved'; return true;
+    } catch(e) {}
+  }
+  return false;
+}
+
 if (!loadSaved()) {
   const mid1 = moduleCounter++;
   const acts1 = [
@@ -1038,8 +1124,6 @@ if (!loadSaved()) {
   modules.push({ mid:mid2, name:'Cálculo Integral', open:false, uv:4, activities:acts2, _final:null });
   renderModule(mid2, 'Cálculo Integral', acts2, false, 4);
   recalcModule(mid2);
-
-  recalcCUM();
 }
 loadAvanceState();
 updateHistoryBtns();
